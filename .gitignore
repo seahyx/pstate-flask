@@ -131,7 +131,10 @@ dmypy.json
 
 # Typescript
 tsconfig.json
-home-gate.code-workspace
+
+# VSCode settings
+.code-workspace
+.vscode/
 
 # Database files
 .db
