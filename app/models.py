@@ -13,10 +13,10 @@ class Group(db.Model):
 	name = db.Column(db.String(32), index=True, unique=True)
 
 	# link to users
-	users = db.relationship('User', backref='author', lazy='dynamic')
+	users = db.relationship('User', backref='group', lazy='dynamic')
 
 	def __repr__(self):
-		return '<Group {}>'.format(self.name)
+		return '<{} Group {}>'.format(self.id, self.name)
 
 class User(UserMixin, db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -24,8 +24,11 @@ class User(UserMixin, db.Model):
 	# link to group
 	group_id = db.Column(db.Integer, db.ForeignKey('group.id'))
 
-	# account username
-	username = db.Column(db.String(32), index=True, unique=True)
+	# rank
+	rank = db.Column(db.String(10), index=True)
+
+	# full name
+	name = db.Column(db.String(32), index=True, unique=True)
 
 	# account password
 	password_hash = db.Column(db.String(128))
@@ -34,7 +37,7 @@ class User(UserMixin, db.Model):
 	account_type = db.Column(db.Integer, index=True)
 
 	# link to parade state
-	parade_states = db.relationship('PState', backref='author', lazy='dynamic')
+	parade_states = db.relationship('PState', backref='user', lazy='dynamic')
 
 	ACCOUNT_TYPES = [(0, 'Root'), (1, 'Admin'), (2, 'Trusted User'), (3, 'Temp User')]
 
@@ -51,7 +54,7 @@ class User(UserMixin, db.Model):
 		return (self.account_type == 0 or self.account_type == 1)
 
 	def __repr__(self):
-		return '<{} {}, account_type {}>'.format(self.get_account_type_name(), self.username, self.account_type)
+		return '<{} {} {},\ngroup_id/group: {} {},\naccount type: {}>'.format(self.id, self.rank, self.name, self.group_id, self.group.name, self.get_account_type_name())
 
 # Parade state table linked to every user.
 class PState(db.Model):
@@ -70,11 +73,46 @@ class PState(db.Model):
 	state_am = db.Column(db.String(32), index=True)
 	state_am_reason = db.Column(db.String(32), index=True)
 	state_am_location = db.Column(db.String(32), index=True)
+
+	# boolean for if there is two different states
+	full_day = db.Column(db.Boolean, index=True)
 	
 	# secondary parade state, left empty (null) if pstate is whole day
 	state_pm = db.Column(db.String(32), index=True)
 	state_pm_reason = db.Column(db.String(32), index=True)
 	state_pm_location = db.Column(db.String(32), index=True)
 
+	def format_date(self, date):
+		return date.strftime('%d%m%y')
+
+	def get_parade_state(self):
+
+		if self.state_am is None:
+			return 'Error: Valid parade state is not provided'
+		
+		state = self.state_am
+
+		if self.state_am_location is not None:
+			state += '@{}'.format(self.state_am_location)
+		
+		if self.state_am_reason is not None:
+			state += ' ({})'.format(self.state_am_reason)
+
+		if self.full_day is not None and not self.full_day:
+			# has both am and pm pstate
+			state += '/{}'.format(self.state_pm)
+
+			if self.state_pm_location is not None:
+				state += '@{}'.format(self.state_pm_location)
+			
+			if self.state_pm_reason is not None:
+				state += ' ({})'.format(self.state_pm_reason)
+		
+		if self.end_date is not None:
+			# has an end date
+			state += ' till {}'.format(self.format_date(self.end_date))
+		
+		return state
+	
 	def __repr__(self):
-		return '<PState {} formatted pstate: {},\nstate_am: {}, state_am_reason: {}. state_am_location: {},\nstate_pm: {}, state_pm_reason: {}, state_pm_location: {}>'.format(self.date, self.state, self.state_am, self.state_am_reason, self.state_am_location, self.state_pm, self.state_pm_reason, self.state_pm_location)
+		return '<{} PState {}\nformatted pstate: {},\nfull_day: {},\nstate_am: {}, state_am_reason: {}, state_am_location: {},\nstate_pm: {}, state_pm_reason: {}, state_pm_location: {}>'.format(self.id, self.format_date(self.date), self.get_parade_state(), self.full_day, self.state_am, self.state_am_reason, self.state_am_location, self.state_pm, self.state_pm_reason, self.state_pm_location)
