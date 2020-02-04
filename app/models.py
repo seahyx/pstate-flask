@@ -33,13 +33,19 @@ class User(UserMixin, db.Model):
 	# account password
 	password_hash = db.Column(db.String(128))
 
+	# email
+	email = db.Column(db.String(120), index=True, unique=True)
+
+	# mobile phone number
+	hp = db.Column(db.String(8), index=True, unique=True)
+
 	# account permission level
 	account_type = db.Column(db.Integer, index=True)
 
 	# link to parade state
 	parade_states = db.relationship('PState', backref='user', lazy='dynamic')
 
-	ACCOUNT_TYPES = [(0, 'Root'), (1, 'Admin'), (2, 'Trusted User'), (3, 'Temp User')]
+	ACCOUNT_TYPES = [(0, 'Root'), (1, 'Admin'), (2, 'User')]
 
 	def set_password(self, password):
 		self.password_hash = generate_password_hash(password)
