@@ -9,10 +9,16 @@
 	--blue: #C7CEEA;
 
 	/* Font */
-	--primaryFont: 'Raleway', sans-serif;
+	--primaryFont: 'Muli', sans-serif;
 	--secondaryFont: 'Lato', sans-serif;
 }
 
+
+/* --- Body --- */
+
+body {
+	margin: 0;
+}
 
 /* --- Header --- */
 
@@ -332,9 +338,9 @@ h2 {
 }
 
 
-/* --- Span --- */
+/* --- error --- */
 
-span.error {
+.error {
 	color: red;
 	font-family: var(--secondaryFont);
 }
