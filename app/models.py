@@ -60,7 +60,7 @@ class User(UserMixin, db.Model):
 		return (self.account_type == 0 or self.account_type == 1)
 
 	def __repr__(self):
-		return '<{} {} {},\ngroup_id/group: {} {},\naccount type: {}>'.format(self.id, self.rank, self.name, self.group_id, self.group.name, self.get_account_type_name())
+		return '<{} {} {}, email: {}, hp: {},\ngroup_id/group: {} {},\naccount type: {}>'.format(self.id, self.rank, self.name, self.email, self.hp, self.group_id, self.group.name, self.get_account_type_name())
 
 # Parade state table linked to every user.
 class PState(db.Model):
