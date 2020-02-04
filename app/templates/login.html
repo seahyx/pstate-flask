@@ -2,49 +2,97 @@
 
 {% block content %}
 
-	<div class='container' style='max-width: 400px; margin-left: auto; margin-right: auto;'>
+	<!-- CSS -->
+	<link rel='stylesheet' type='text/css'
+	href="{{ url_for('static', filename='styles/login.css') }}">
 
-		<h1>Welcome Home!</h1>
-		
-		<form action='' method='POST' class='flex-vertical' novalidate>
+	<div class='big-wrapper'>
+
+		<div class='shape' id='a'></div>
+		<div class='shape' id='b'></div>
+		<div class='shape' id='c'></div>
+		<div class='shape' id='d'></div>
+		<div class='shape' id='e'></div>
+		<div class='shape' id='f'></div>
+
+		<div class='container login-container'>
+
+			<h1>PState login!</h1>
+
+			{% if fail_count >= 1 %}
+			<p class='error'>Wrong email or password</p>
+			{% endif %}
+
+			{% if fail_count == 2 %}
+			<p class='error'>Again! :P</p>
+			{% elif fail_count == 3 %}
+			<p class='error'>Again again. >:P</p>
+			{% elif fail_count == 4 %}
+			<p class='error'>Again again again oi! XP</p>
+			{% elif fail_count == 5 %}
+			<p class='error'>Did you even try? :/</p>
+			{% elif fail_count == 6 %}
+			<p class='error'>You sure you're even trying the right passwords? :|</p>
+			{% elif fail_count == 7 %}
+			<p class='error'>Oi serious eh. You legit nothing do ah? :|</p>
+			{% elif fail_count == 8 %}
+			<p class='error'>You know, you should know when to stop. You know this probably isn't going to work. Just admit it. >:/</p>
+			{% elif fail_count == 10 %}
+			<p class='error'>Actually there's a reward when you reach 100 fails in a row. (foreal)(not prank)(haven't gone sexual) ^.^</p>
+			{% elif fail_count == 99 %}
+			<p class='error'>Congratulations, you're an idiot.  (•ө•)♡</p>
+			{% elif fail_count == 100 %}
+			<p class='error'>You cheated didn't you! Bloody cheater. DISgusTANG ಠ_ಠ</p>
+			{% elif fail_count >= 2 %}
+			<p class='error'><em>"Insanity is doing the same thing over and over again and expecting different results."</em> - Not Albert Einstein (ps. nobody actually knows who) :X</p>
+			{% endif %}
+
 			
-			<!-- Form security protection -->
-			{{ form.hidden_tag() }}
-
-
-			<!-- Username -->
-			<div class='flex-horizontal' style='align-items: baseline;'>
-				{{ form.username.label }}
-
-				{% for error in form.username.errors %}
-				<span class='error'>*{{ error }}</span>
-				{% endfor %}
-			</div>
-			
-			{{ form.username(autofocus=true, placeholder='username', autocorrect='off', autocapitalize='none') }}
-
-
-			<!-- Password -->
-			<div class='flex-horizontal' style='align-items: baseline;'>
-				{{ form.password.label }}
-
-				{% for error in form.password.errors %}
-				<span class='error'>*{{ error }}</span>
-				{% endfor %}
-			</div>
-			
-			{{ form.password(placeholder='password') }}
-
-
-			<!-- Remember me -->
-			<div class='flex-horizontal' style='align-items:center'>
-				{{ form.rmb_me(class='checkbox') }}
-				{{ form.rmb_me.label(style='margin-left:5px') }}
-			</div>
-
-			<button id='submit' type='submit' class='btn-small teal'>Enter</button>
-
-		</form>
+			<form action='' method='POST' class='flex-vertical' novalidate>
+				
+				<!-- Form security protection -->
+				{{ form.hidden_tag() }}
+	
+	
+				<!-- Email -->
+				<div class='flex-horizontal' style='align-items: baseline;'>
+					<!-- {{ form.email.label }} -->
+	
+					{% for error in form.email.errors %}
+					<span class='error'>*{{ error }}</span>
+					{% endfor %}
+				</div>
+				
+				{% if email %}
+				{{ form.email(autofocus=true, placeholder='Email', autocorrect='off', autocapitalize='none', value=email) }}
+				{% else %}
+				{{ form.email(autofocus=true, placeholder='Email', autocorrect='off', autocapitalize='none') }}
+				{% endif %}
+				
+	
+				<!-- Password -->
+				<div class='flex-horizontal' style='align-items: baseline;'>
+					<!-- {{ form.password.label }} -->
+	
+					{% for error in form.password.errors %}
+					<span class='error'>*{{ error }}</span>
+					{% endfor %}
+				</div>
+				
+				{{ form.password(placeholder='Password') }}
+	
+	
+				<!-- Remember me -->
+				<div class='flex-horizontal' style='align-items:center'>
+					{{ form.rmb_me(class='checkbox') }}
+					{{ form.rmb_me.label(style='margin-left:5px') }}
+				</div>
+	
+				<button id='submit' type='submit' class='btn-small teal'>Enter</button>
+	
+			</form>
+	
+		</div>
 
 	</div>
 
