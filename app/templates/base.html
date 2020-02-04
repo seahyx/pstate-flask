@@ -21,7 +21,7 @@
 	<meta name="theme-color" content="#ffffff">
 	
 	<!-- Fonts -->
-	<link href='https://fonts.googleapis.com/css?family=Lato:400,700|Raleway:400,700&display=swap' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,700|Muli:400,700&display=swap' rel='stylesheet'>
 	
 	<!-- CSS -->
 	<link rel='stylesheet' type='text/css'
@@ -31,6 +31,7 @@
 </head>
 
 <body>
+	{% if not no_header %}
 	<header>
 		<ul>
 			{% if current_user.is_anonymous %}
@@ -44,6 +45,7 @@
 			{% endif %}
 		</ul>
 	</header>
+	{% endif %}
 
 	<!-- Show flash messages -->
 	{% with messages = get_flashed_messages() %}
