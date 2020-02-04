@@ -12,11 +12,11 @@
 			{{ form.hidden_tag() }}
 
 
-			<!-- Username -->
+			<!-- Email -->
 			<div class='flex-horizontal' style='align-items: baseline;'>
-				{{ form.username.label }}
+				{{ form.email.label }}
 
-				{% for error in form.username.errors %}
+				{% for error in form.email.errors %}
 				<span class='error'>*{{ error }}</span>
 				{% endfor %}
 			</div>

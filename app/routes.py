@@ -39,16 +39,17 @@ def login():
 
 	if form.validate_on_submit():
 
-		# Find a user by username from the User db table
-		user = User.query.filter_by(username=form.username.data).first()
+		# Find a user by email from the User db table
+		user = User.query.filter_by(email=form.email.data).first()
 
-		if user is None or not user.check_password(form.password.data):
-			# Wrong username or password
-			flash('Invalid username or password')
-			return redirect(url_for('login'))
+		# Wrong email or password
+		if not user or not user.check_password(form.password.data):
+			fail_count = int(request.args.get('fail_count', 0))
+			fail_count += 1
+			print(fail_count)
+			return redirect(url_for('login', prev_email=form.email.data, fail_count=fail_count))
 
-		# Correct username and password
-		flash('Logged in successfully')
+		# Correct email and password
 		login_user(user, remember=form.rmb_me.data)
 
 		next_page = request.args.get('next')
@@ -58,7 +59,10 @@ def login():
 
 		return redirect(next_page)
 	
-	return render_template('login.html', title='Login', form=form)
+	fail_count = int(request.args.get('fail_count', 0))
+	prev_email = request.args.get('prev_email')
+	
+	return render_template('login.html', title='Login', form=form, no_header=True, email=prev_email, fail_count=fail_count)
 
 
 @app.route('/logout/')
@@ -75,11 +79,11 @@ def registration():
 	form = RegistrationForm()
 
 	if form.validate_on_submit():
-		user = User(username=form.username.data, account_type=form.account_type.data)
+		user = User(email=form.email.data, account_type=form.account_type.data)
 		user.set_password(form.password.data)
 		db.session.add(user)
 		db.session.commit()
-		flash('{} {} has been created'.format(user.get_account_type_name(), user.username))
+		flash('{} {} has been created'.format(user.get_account_type_name(), user.email))
 
 		next_page = request.args.get('next')
 		# Netloc tests if next is pointed towards other site, which can link to malicious sites. Thus not accepting the redirect if it has value.
@@ -107,32 +111,32 @@ def dashboard():
 				# The user is not the currently logged in user or root, thus can be safely deleted
 				db.session.delete(user)
 				db.session.commit()
-				print('Success: User with username {}, id of {} is deleted'.format(user.username, removal_id))
-				flash('Success: User with username {}, id of {} is deleted'.format(user.username, removal_id))
+				print('Success: User with email {}, id of {} is deleted'.format(user.email, removal_id))
+				flash('Success: User with email {}, id of {} is deleted'.format(user.email, removal_id))
 			else:
 				# The user is root or current user, thus cannot be removed
-				print('Error: User with username {}, id of {} cannot be deleted'.format(user.username, removal_id))
-				flash('Error: User with username {}, id of {} cannot be deleted'.format(user.username, removal_id))
+				print('Error: User with email {}, id of {} cannot be deleted'.format(user.email, removal_id))
+				flash('Error: User with email {}, id of {} cannot be deleted'.format(user.email, removal_id))
 		else:
 			# The user doesn't exist
 			print('Error: User with id of {} does not exist'.format(removal_id))
 			flash('Error: User with id of {} does not exist'.format(removal_id))
 
-	return render_template('dashboard.html', title='Admin Dashboard', users=User.query.order_by(User.account_type).order_by(User.username).all())
+	return render_template('dashboard.html', title='Admin Dashboard', users=User.query.order_by(User.account_type).order_by(User.email).all())
 
 
-@app.route('/dashboard/change-pass/<username>/', methods=['GET', 'POST'])
+@app.route('/dashboard/change-pass/<email>/', methods=['GET', 'POST'])
 @login_required
 @permissions.admin_required
-def change_pass(username):
-	user = User.query.filter_by(username=username).first_or_404()
+def change_pass(email):
+	user = User.query.filter_by(email=email).first_or_404()
 
 	form = ChangePasswordForm()
 
 	if form.validate_on_submit():
 		user.set_password(form.password.data)
 		db.session.commit()
-		flash('Success: Password for {} {} has been changed'.format(user.get_account_type_name(), user.username))
+		flash('Success: Password for {} {} has been changed'.format(user.get_account_type_name(), user.email))
 		return(redirect(url_for('dashboard')))
 	
 	return(render_template('change-pass.html', title='Change password', form=form, user=user))
