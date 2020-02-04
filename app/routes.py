@@ -45,7 +45,8 @@ def login():
 		# Wrong email or password
 		if not user or not user.check_password(form.password.data):
 			fail_count = int(request.args.get('fail_count', 0))
-			fail_count += 1
+			if fail_count != 99:
+				fail_count += 1
 			print(fail_count)
 			return redirect(url_for('login', prev_email=form.email.data, fail_count=fail_count))
 
