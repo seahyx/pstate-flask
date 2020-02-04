@@ -1,0 +1,111 @@
+2020-01-25 23:30:28,708 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 21:05:30,899 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 21:39:11,916 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 21:39:24,382 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 21:39:30,124 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 21:39:37,291 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 21:39:54,721 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 21:43:35,443 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 21:43:41,146 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 21:44:01,532 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 21:49:24,219 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 21:50:58,378 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 22:27:23,691 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 22:28:46,254 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 22:47:15,424 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 22:48:34,312 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 22:50:25,090 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 22:53:54,217 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 22:55:10,605 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 22:56:32,510 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 23:08:26,925 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-03 23:08:45,499 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-04 19:54:33,425 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-04 20:08:25,101 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-04 20:08:34,417 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-04 20:25:55,011 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-04 20:26:02,903 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-04 20:26:02,992 ERROR: Exception on /login/ [GET] [in C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\app.py:1890]
+Traceback (most recent call last):
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\_compat.py", line 39, in reraise
+    raise value
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "F:\Github\Projects\pstate-flask\app\routes.py", line 60, in login
+    return render_template('login.html', title='Login', form=form)
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\templating.py", line 137, in render_template
+    return _render(
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\templating.py", line 120, in _render
+    rv = template.render(context)
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\jinja2\environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\jinja2\environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\jinja2\_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "F:\Github\Projects\pstate-flask\app\templates\login.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\jinja2\environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\jinja2\_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "F:\Github\Projects\pstate-flask\app\templates\base.html", line 34, in template
+    {% if title is 'Login' %}
+jinja2.exceptions.TemplateSyntaxError: expected token 'name', got 'string'
+2020-02-04 20:26:03,771 ERROR: Exception on /favicon.ico [GET] [in C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\app.py:1890]
+Traceback (most recent call last):
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\app.py", line 1925, in dispatch_request
+    self.raise_routing_exception(req)
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\app.py", line 1907, in raise_routing_exception
+    raise request.routing_exception
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\ctx.py", line 350, in match_request
+    result = self.url_adapter.match(return_rule=True)
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\werkzeug\routing.py", line 1799, in match
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\app.py", line 1815, in handle_user_exception
+    return self.handle_http_exception(e)
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\app.py", line 1743, in handle_http_exception
+    return handler(e)
+  File "F:\Github\Projects\pstate-flask\app\errors.py", line 6, in not_found_error
+    return render_template('404.html', title='404 This is a sad day'), 404
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\templating.py", line 137, in render_template
+    return _render(
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\flask\templating.py", line 120, in _render
+    rv = template.render(context)
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\jinja2\environment.py", line 1090, in render
+    self.environment.handle_exception()
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\jinja2\environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\jinja2\_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "F:\Github\Projects\pstate-flask\app\templates\404.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\jinja2\environment.py", line 832, in handle_exception
+    reraise(*rewrite_traceback_stack(source=source))
+  File "C:\Users\seahy\Envs\pstate-flask\lib\site-packages\jinja2\_compat.py", line 28, in reraise
+    raise value.with_traceback(tb)
+  File "F:\Github\Projects\pstate-flask\app\templates\base.html", line 34, in template
+    {% if title is 'Login' %}
+jinja2.exceptions.TemplateSyntaxError: expected token 'name', got 'string'
+2020-02-04 20:27:21,323 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-04 20:27:24,574 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
+2020-02-04 20:27:28,096 INFO: PState Flask server startup... [in F:\Github\Projects\pstate-flask\app\__init__.py:48]
