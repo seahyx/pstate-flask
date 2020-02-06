@@ -2,11 +2,13 @@
 :root {
 	/* Colours */
 	--red: #FF9AA2;
+	--lightred: #ffb7bd;
 	--orange: #FFB7B2;
 	--yellow: #FFDAC1;
 	--green: #E2F0CB;
 	--teal: #B5EAD7;
-	--blue: #C7CEEA;
+	--blue: #c8ceea;
+	--lightblue: #dae1ff;
 
 	/* Font */
 	--primaryFont: 'Muli', sans-serif;
@@ -17,32 +19,52 @@
 /* --- Body --- */
 
 body {
+	display: flex;
+	flex-flow: row nowrap;
 	margin: 0;
 }
 
 /* --- Header --- */
 
 header {
-	width: 100%;
+	width: 11rem;
+	height: 100%;
 
-	position: relative;
-	top: 0;
+	padding-left: 30px;
 
-	margin-bottom: 10px;
+	position: fixed;
+	left: 0;
 
-	background-color: var(--red);
+	background-color: var(--blue);
+
+	overflow-x: hidden;
 
 	z-index: 1;
 }
+
+header h1 {
+	margin-left: 0;
+	font-weight: bold;
+}
+
+header p {
+	margin-left: 0;
+}
+
+header p#header-email {
+	margin-bottom: 20px;
+	overflow-wrap: break-word;
+}
+
 header ul {
 	display: flex;
-	flex-flow: row nowrap;
+	flex-flow: column nowrap;
 
 	overflow: scroll hidden;
 
 	list-style: none;
 	margin: 0;
-	padding: 20px;
+	padding: 0;
 }
 header ul::-webkit-scrollbar {
 	display: none;
@@ -50,19 +72,13 @@ header ul::-webkit-scrollbar {
 header ul li {
 	display: flex;
 }
-header ul li::after {
-	/* Draws a dot after each list element */
-	content: '\00b7';
-	cursor: default;
-}
-header ul li:last-child::after {
-	/* Not draw a dot after the last list element */
-	content: '';
-}
 header ul li a {
 	position: relative;
 
-	margin: 0 10px;
+	width: 100%;
+
+	margin: 0;
+	padding: 15px 20px;
 	color: black;
 	font-family: var(--primaryFont);
 	font-weight: bold;
@@ -75,16 +91,33 @@ header ul li a {
 	-o-transition: all 0.15s;
 	transition: all 0.15s;
 }
-header ul li a::after {
-	content: '';
-	position: absolute;
-	width: 0;
-	height: 4px;
-	bottom: 0;
-	left: 0;
+header ul li a:hover {
+	padding-left: 30px;
+	background-color: var(--lightblue);
+}
+header ul li a:active {
+	background-color: white;
+}
+header ul li a.active {
+	background-color: white;
+}
 
-	background-color: black;
-	visibility: hidden;
+header #header-logout {
+	position: absolute;
+	bottom: 0;
+
+	margin: 10px 10px 20px 10px;
+
+	padding: 10px 20px;
+	
+	color: black;
+	font-family: var(--primaryFont);
+	font-weight: bold;
+	text-decoration: none;
+	white-space: nowrap;
+
+	background-color: var(--red);
+	border-radius: 4px;
 
 	-webkit-transition: all 0.15s;
 	-moz-transition: all 0.15s;
@@ -92,25 +125,24 @@ header ul li a::after {
 	-o-transition: all 0.15s;
 	transition: all 0.15s;
 }
-header ul li a:hover {
-	text-shadow: 0 1px 0 white;
+header #header-logout:hover {
+	background-color: var(--lightred);
 }
-header ul li a:hover::after {
-	box-shadow: 0 1px 0 white;
-	
-	visibility: visible;
-	
+header #header-logout:active {
+	background-color: red;
+}
+
+
+/* --- Content Body --- */
+
+#content-spacer {
+	flex: 0 0 11rem;
+	padding-left: 30px;
+}
+
+#content-body {
+	padding: 10px;
 	width: 100%;
-}
-header ul li a:active {
-	text-shadow: none;
-}
-header ul li a:active::after {
-	box-shadow: none;
-
-	visibility: visible;
-
-	height: 0;
 }
 
 
