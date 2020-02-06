@@ -15,38 +15,38 @@
 
 			<!-- Email -->
 			<div class='flex-horizontal' style='align-items: baseline;'>
-				{{ form.email.label }}
+				<!-- {{ form.email.label }} -->
 
 				{% for error in form.email.errors %}
 				<span class='error'>*{{ error }}</span>
 				{% endfor %}
 			</div>
 			
-			{{ form.username(autofocus=true, placeholder='username', autocorrect='off', autocapitalize='none') }}
+			{{ form.email(autofocus=true, placeholder='Email', autocorrect='off', autocapitalize='none') }}
 
 
 			<!-- Password -->
 			<div class='flex-horizontal' style='align-items: baseline;'>
-				{{ form.password.label }}
+				<!-- {{ form.password.label }} -->
 
 				{% for error in form.password.errors %}
 				<span class='error'>*{{ error }}</span>
 				{% endfor %}
 			</div>
 			
-			{{ form.password(placeholder='password') }}
+			{{ form.password(placeholder='Password') }}
 
 
 			<!-- Confirm Password -->
 			<div class='flex-horizontal' style='align-items: baseline;'>
-				{{ form.password2.label }}
+				<!-- {{ form.password2.label }} -->
 
 				{% for error in form.password2.errors %}
 				<span class='error'>*{{ error }}</span>
 				{% endfor %}
 			</div>
 			
-			{{ form.password2(placeholder='password') }}
+			{{ form.password2(placeholder='Confirm Password') }}
 
 
 			<!-- Select account type -->
@@ -63,9 +63,8 @@
 
 			<!-- Additional info -->
 			<p>
-				<strong>Admin</strong> - Access to gate, dashboard, and change password, delete, and add users<br>
-				<strong>Trusted user</strong> - Can open gate from home and external networks (everywhere)<br>
-				<strong>Temp user</strong> - Can only open gate from home network (stingray)
+				<strong>Admin</strong> - Change password, delete, and add users<br>
+				<strong>User</strong> - Has no access to user management (but still can view users)<br>
 			</p>
 	
 			<button id='submit' type='submit' class='btn-small teal'>Register</button>
