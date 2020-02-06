@@ -376,6 +376,9 @@ h2 {
 	color: red;
 	font-family: var(--secondaryFont);
 }
+span.error {
+	margin: 5px 10px;
+}
 
 
 /* --- img --- */
