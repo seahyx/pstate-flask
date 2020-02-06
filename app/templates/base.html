@@ -33,32 +33,45 @@
 <body>
 	{% if not no_header %}
 	<header>
+		<h1>PState</h1>
+		<p>Logged in as</p>
+		<p id='header-email'><strong>{{ current_user.email }}</strong></p>
+
+		{% set navigation_bar = [
+			('index', 'Home'),
+			('dashboard', 'Dashboard')
+		] -%}
+		{% set active_page = active_page|default('index') -%}
 		<ul>
-			{% if current_user.is_anonymous %}
-			<li><a href="{{ url_for('login') }}">Login</a></li>
-			{% else %}
-			<li><a href="{{ url_for('index') }}">Home</a></li>
-			{% if current_user.is_authenticated and current_user.has_admin_rights() %}
-			<li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
-			{% endif %}
-			<li><a href="{{ url_for('logout') }}">Logout</a></li>
-			{% endif %}
+			{% for href, name in navigation_bar %}
+				{% if href != 'dashboard' or (href == 'dashboard' and (current_user.is_authenticated and current_user.has_admin_rights())) %}
+					<li><a href='{{ url_for(href|e) }}' {% if href == active_page %} class='active'{% endif %}>{{ name|e }}</a></li>
+				{% endif %}
+			{% endfor %}
 		</ul>
+		<!-- Log out -->
+		{% if not current_user.is_anonymous %}
+		<a id='header-logout' href="{{ url_for('logout') }}">Log out >></a>
+		{% endif %}
 	</header>
 	{% endif %}
 
-	<!-- Show flash messages -->
-	{% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul class='flash'>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-		{% endif %}
-	{% endwith %}
+	<div id='content-spacer'></div>
 
-	{% block content %}{% endblock %}
+	<div id='content-body'>
+		<!-- Show flash messages -->
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+			<ul class='flash'>
+				{% for message in messages %}
+				<li>{{ message }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+		{% endwith %}
+	
+		{% block content %}{% endblock %}
+	</div>
 
 </body>
 
